@@ -59,6 +59,26 @@ bomCompatModuleProblemFilters := Map(
     ProblemFilters.exclude[Problem]("io.netty.util.internal.shaded.*")))
 ```
 
+## Example output
+
+From the `breaking` scripted test, where the BOM bumps okhttp 3.14.9 to the
+binary-incompatible 4.12.0 (abridged):
+
+```text
+> bomCompat
+[info] mima-bom: previous BOM has 1 entries, current has 1
+[info] mima-bom: resolving 1 current jars (context classpath) ...
+[info] mima-bom: checking com.squareup.okhttp3:okhttp 3.14.9 -> 4.12.0
+[error] mima-bom: com.squareup.okhttp3:okhttp 3.14.9 -> 4.12.0: 173 binary incompatibilities
+[error]   * method callTimeoutMillis()Int in class okhttp3.OkHttpClient is declared final in current version
+[error]   * method proxy()java.net.Proxy in class okhttp3.OkHttpClient is declared final in current version
+[error]   * static field instance in class okhttp3.internal.Internal does not have a correspondent in current version
+[error]   * abstract method addLenient(okhttp3.Headers#Builder,java.lang.String)Unit in class okhttp3.internal.Internal does not have a correspondent in current version
+...
+[error] mima-bom check failed: 1 binary-incompatible upgrades
+[error] (bomCompat) mima-bom check failed: 1 binary-incompatible upgrades
+```
+
 ## Notes and limitations
 
 - Entries with a classifier (e.g. native artifacts) or a non-`jar` type are skipped for MiMa
