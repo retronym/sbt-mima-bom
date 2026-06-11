@@ -1,0 +1,5 @@
+# jsr305 was dropped from the BOM: must fail
+-> bomCompat
+# unless the removal is explicitly allowed
+> 'set bomCompatAllowedRemovals := Set("com.google.code.findbugs:jsr305")'
+> bomCompat

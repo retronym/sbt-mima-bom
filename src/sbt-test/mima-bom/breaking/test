@@ -1,0 +1,7 @@
+# okhttp 3 -> 4 is heavily binary incompatible: must fail
+-> bomCompat
+# the report task itself still succeeds and can be inspected
+> bomCompatReport
+# ignoring the module makes the check pass
+> 'set bomCompatIgnoredModules := Set("com.squareup.okhttp3:okhttp")'
+> bomCompat
